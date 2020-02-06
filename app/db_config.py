@@ -108,12 +108,6 @@ def get_create_queries():
         list of all queries used in database table creation
     """
     create_user_table = """
-    DO $$ BEGIN
-        CREATE TYPE user_role AS ENUM ('vendor', 'regular');
-    EXCEPTION
-        THEN null;
-    END $$;
-    
     CREATE TABLE IF NOT EXISTS users(
     id serial PRIMARY KEY,
     fname VARCHAR(30) NOT NULL,
@@ -124,7 +118,7 @@ def get_create_queries():
     phone VARCHAR(13) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     isAdmin BOOLEAN NOT NULL DEFAULT false,
-    role  user_role NOT NULL DEFAULT 'regular',
+    role ENUM('vendor', 'regular') NOT NULL DEFAULT 'regular',
     createdOn DATE NOT NULL
     );
     SET datestyle = "ISO, YMD";
