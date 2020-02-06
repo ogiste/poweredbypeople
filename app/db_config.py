@@ -51,9 +51,9 @@ def connection(db_name=None, init_db_uri=None):
         db_name = os.getenv("DB_NAME")
     db_uri = "dbname={} host={} user={} password={} port={} ". \
         format(db_name, db_host, db_user, db_pass, db_port)
-    if db_name is "ireporter_test":
+    if db_name is "poweredbypeople_test":
         db_uri = "dbname={} host={} user={} password={}". \
-            format(db_name, "localhost", 'test_user', 'test_ireporter')
+            format(db_name, "localhost", 'test_user', 'test_poweredbypeople')
     if db_name is "tester":
         db_name = os.getenv("DB_NAME")
         db_uri = "dbname={} host={} user={} password={} port={} ". \
@@ -108,6 +108,8 @@ def get_create_queries():
         list of all queries used in database table creation
     """
     create_user_table = """
+    CREATE TYPE user_role AS ENUM ('vendor', 'regular');
+    
     CREATE TABLE IF NOT EXISTS users(
     id serial PRIMARY KEY,
     fname VARCHAR(30) NOT NULL,
@@ -118,27 +120,53 @@ def get_create_queries():
     phone VARCHAR(13) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     isAdmin BOOLEAN NOT NULL DEFAULT false,
+    role  user_role NOT NULL DEFAULT 'regular',
     createdOn DATE NOT NULL
     );
     SET datestyle = "ISO, YMD";
 
     SELECT setval('users_id_seq', (SELECT MAX(id) FROM users)+1)
     """
-    create_incident_table = """
-    CREATE TABLE IF NOT EXISTS incidents(
+    create_shops_table = """
+    CREATE TABLE IF NOT EXISTS shops(
     id serial PRIMARY KEY,
     createdBy INT NOT NULL,
-    title VARCHAR(30) NOT NULL,
-    type VARCHAR(12) NOT NULL,
-    comment VARCHAR(100) NOT NULL,
-    status VARCHAR(20) NOT NULL,
+    name VARCHAR(30) NOT NULL,
     location VARCHAR(40) NOT NULL,
     createdOn DATE NOT NULL,
     FOREIGN KEY (createdBy) REFERENCES users(id)
     );
     """
 
-    return [create_user_table, create_incident_table]
+    create_products_table = """
+    CREATE TABLE IF NOT EXISTS products(
+    id serial PRIMARY KEY,
+    shop INT NOT NULL,
+    createdBy INT NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    cost FLOAT NOT NULL,
+    createdOn DATE NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES users(id),
+    FOREIGN KEY (shop) REFERENCES shops(id)
+    );
+    """
+
+    create_orders_table = """
+    CREATE TABLE IF NOT EXISTS orders(
+    id serial PRIMARY KEY,
+    createdBy INT NOT NULL,
+    shop INT NOT NULL,
+    product INT NOT NULL,
+    quantity INT NOT NULL default 1,
+    cost FLOAT NOT NULL,
+    createdOn DATE NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES users(id),
+    FOREIGN KEY (shop) REFERENCES shops(id),
+    FOREIGN KEY (product) REFERENCES products(id)
+    );
+    """
+
+    return [create_user_table, create_shops_table, create_products_table, create_orders_table]
 
 
 def drop_tables(conn=None):
@@ -163,8 +191,11 @@ def get_drop_queries(conn=None):
         list of all queries used in database table removal
     """
     drop_user_table = "DROP table if exists users CASCADE;"
-    drop_incident_table = "DROP table if exists incidents CASCADE;"
-    return [drop_user_table, drop_incident_table]
+    drop_shops_table = "DROP table if exists shops CASCADE;"
+    drop_products_table = "DROP table if exists products CASCADE;"
+    drop_orders_table = "DROP table if exists orders CASCADE;"
+
+    return [drop_user_table, drop_shops_table, drop_products_table, drop_orders_table];
 
 
 def delete_all_rows(conn=None):
@@ -189,8 +220,10 @@ def get_delete_all_queries(conn=None):
         list of all queries used in database table removal
     """
     delete_all_users = "DELETE FROM users;"
-    delete_all_incidents = "DELETE FROM incidents;"
-    return [delete_all_users, delete_all_incidents]
+    delete_all_shops = "DELETE FROM shops;"
+    delete_all_products = "DELETE FROM products;"
+    delete_all_orders = "DELETE FROM orders";
+    return [delete_all_users, delete_all_shops, delete_all_products, delete_all_orders]
 
 
 if __name__ == '__main__':
