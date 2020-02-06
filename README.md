@@ -8,7 +8,7 @@ Clone this repo to your machine
 
 Then change the directory to the project by
 
-``` cd ireporter ```
+``` cd poweredpypeople ```
 
 to make sure all the packages needed to run the project present in your machine,
 we'll create a virtual environment and install the packages there

@@ -1,0 +1,30 @@
+# Let travis know the language it needs to run
+language: python
+
+# Mention the python version in which travis will run the app
+python:
+  - "3.6.9"
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'CREATE DATABASE poweredbypeople_test;' -U postgres
+  - psql -c "CREATE USER test_user WITH PASSWORD 'test_poweredbypeople';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES on database poweredbypeople_test to test_poweredbypeople;" -U postgres
+
+# command to install dependencies in the requirements file
+# You can also install the coverage here to avoid it being in the requirements file
+# It is important to avoid things like coverage, pep8 that are not required to run the app
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls codecov
+
+  # Another command/method to run tests
+script:
+  - nosetests --with-coverage --cover-package=app
+
+# Using codecov to get coverage
+after_success:
+  - codecov
+  - coveralls
