@@ -1,0 +1,14 @@
+UI/images
+venv/
+bin/
+lib/
+local/
+include/
+__pycache__/
+*.py[cod]
+*.pyc
+*$py.class
+.coverage
+.env
+.test.env
+.eslintrc
