@@ -111,7 +111,7 @@ def get_create_queries():
     DO $$ BEGIN
         CREATE TYPE user_role AS ENUM ('vendor', 'regular');
     EXCEPTION
-        WHEN duplicate_object THEN null;
+        THEN null;
     END $$;
     
     CREATE TABLE IF NOT EXISTS users(
