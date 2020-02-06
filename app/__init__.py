@@ -7,13 +7,13 @@
 
 """
 
-from app.api.helpers.error_handler_validation import status_error_messages
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
 
+from app.api.helpers.error_handler_validation import status_error_messages
 from app.db_config import connect, create_tables
 from instance.config import app_config
-from .api.v2 import v2 as version_two
+from .api.v1 import v1 as version_one
 
 
 def create_app(config_name="development"):
@@ -33,7 +33,7 @@ def create_app(config_name="development"):
     app.config.from_object(app_config[config_name])
     conn = connect(app.config['DB_NAME'])
     create_tables(conn)
-    app.register_blueprint(version_two)
+    app.register_blueprint(version_one)
 
     @app.errorhandler(400)
     def handle_bad_request(error):

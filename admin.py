@@ -19,6 +19,7 @@ def create_admin():
     5.email
     6.phone
     7.password
+    8.role
     """
 
     if len(sys.argv) == 8:
@@ -30,6 +31,7 @@ def create_admin():
             "email": sys.argv[5],
             "phone": sys.argv[6],
             "password": sys.argv[7],
+            "role": sys.argv[8],
             "isAdmin": True,
             "createdOn": datetime.datetime.today().strftime('%Y/%m/%d')
         }
