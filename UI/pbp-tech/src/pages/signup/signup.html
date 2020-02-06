@@ -12,36 +12,36 @@
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.fname" name="name"></ion-input>
+        <ion-label fixed>{{ 'FNAME' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.fname" name="fname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.lname" name="name"></ion-input>
+        <ion-label fixed>{{ 'LNAME' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.lname" name="lname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.other_name" name="name"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        <ion-label fixed>{{ 'OTHERNAME' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.other_name" name="othername"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="name"></ion-input>
+        <ion-label fixed>{{ 'ISADMIN' | translate }}</ion-label>
+        <ion-input type="email" [(ngModel)]="account.isAdmin" name="admin"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.phone" name="name"></ion-input>
+        <ion-label fixed>{{ 'USERNAME' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'PHONE' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.phone" name="phone"></ion-input>
       </ion-item>
 
 
       <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-label fixed>{{ 'ROLE' | translate }}</ion-label>
         <ion-input type="text" [(ngModel)]="account.role" name="role"></ion-input>
       </ion-item>
 

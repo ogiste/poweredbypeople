@@ -29,7 +29,8 @@ export class SignupPage {
     phone: string,
     username: string,
     role: role,
-    password: string
+    password: string,
+    isAdmin: boolean,
   } = {
     fname: 'Tess',
     lname: 'Huma',
@@ -39,6 +40,7 @@ export class SignupPage {
     username: 'user24',
     role: role.regular,
     password: '',
+    isAdmin: false
   };
 
   // Our translated text strings
