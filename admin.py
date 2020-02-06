@@ -1,7 +1,7 @@
 import datetime
 import sys
 
-from app.api.v2.models.user import UserModel
+from app.api.v1.models.user import UserModel
 
 user_db = UserModel()
 
