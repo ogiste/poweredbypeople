@@ -42,6 +42,11 @@ user_parser.add_argument('email', type=str, required=True,
                          location='json',
                          help='Your email is a required field')
 
+user_parser.add_argument('role', type=str, required=True,
+                         location='json',
+                         choices=('regular', 'vendor'),
+                         help='You can either be a vendor or a reqular user')
+
 user_parser.add_argument('phone', type=str, required=True,
                          location='json',
                          help='Your phone number is a required field')

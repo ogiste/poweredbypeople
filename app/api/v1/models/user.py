@@ -129,6 +129,7 @@ class UserModel():
             Dictionary with key,value pairs of user data
         """
         user_details = dict(enumerate(user_tuple))
+        print(user_tuple)
         user_details[6] = user_details[6].strftime('%Y/%m/%d')
         user_details = {
             "id": user_details[0],
@@ -139,7 +140,7 @@ class UserModel():
             "email": user_details[5],
             "createdOn": user_details[6],
             "isAdmin": user_details[7],
-            "phone": user_details[8]
+            "phone": user_details[8],
         }
         if allInfo is True:
             return user_details
@@ -219,15 +220,16 @@ class UserModel():
             "username": new_user["username"],
             "password": new_user["password"],
             "createdOn": new_user["createdOn"],
+            "role": new_user["role"],
             "isAdmin": new_user["isAdmin"]
         }
         if isAdmin is True:
             new_user["isAdmin"] = True
         pw_hash = sha256_crypt.hash(new_user["password"])
         insert_user_statement = """INSERT INTO users(
-        fname,lname,othername,username,email,phone,password,createdOn,isAdmin)
+        fname,lname,othername,username,email,phone,password,createdOn,role,isAdmin)
         VALUES ('{fname}','{lname}','{othername}','{username}','{email}',
-        '{phone}','{password}','{createdOn}',
+        '{phone}','{password}','{createdOn}','{role}',
         '{isAdmin}');""".format(fname=new_user["fname"],
                                 lname=new_user["lname"],
                                 othername=new_user["othername"],
@@ -236,6 +238,7 @@ class UserModel():
                                 phone=new_user["phone"],
                                 password=pw_hash,
                                 createdOn=new_user["createdOn"],
+                                role=new_user["role"],
                                 isAdmin=new_user["isAdmin"])
         try:
             self.cursor.execute(insert_user_statement)

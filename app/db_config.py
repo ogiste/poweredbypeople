@@ -108,7 +108,11 @@ def get_create_queries():
         list of all queries used in database table creation
     """
     create_user_table = """
-    CREATE TYPE user_role AS ENUM ('vendor', 'regular');
+    DO $$ BEGIN
+        CREATE TYPE user_role AS ENUM ('vendor', 'regular');
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$;
     
     CREATE TABLE IF NOT EXISTS users(
     id serial PRIMARY KEY,
