@@ -39,8 +39,12 @@ export class LoginPage {
       this.navCtrl.push(MainPage);
     }, (err) => {
       // Unable to log in
+
+      // Get the server message
+      const msg = err.error.msg;
+
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: `${this.loginErrorString} \n ${msg}`,
         duration: 6000,
         position: 'middle'
       });

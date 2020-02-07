@@ -83,12 +83,14 @@ export class SignupPage {
         toast.present();
       });
     }, (err) => {
+      // Get the server message
+      const msg = err.error.msg;
 
       // Unable to sign up
       let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
+        message: `${this.signupErrorString} \n ${msg}`,
         duration: 6000,
-        position: 'middle'
+        position: 'top'
       });
       toast.present();
     });
