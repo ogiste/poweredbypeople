@@ -21,12 +21,7 @@
       </ion-item>
       <ion-item>
         <ion-label fixed>{{ 'OTHERNAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.other_name" name="othername"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label fixed>{{ 'ISADMIN' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.isAdmin" name="admin"></ion-input>
+        <ion-input [(ngModel)]="account.othername" name="othername" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -42,7 +37,10 @@
 
       <ion-item>
         <ion-label fixed>{{ 'ROLE' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.role" name="role"></ion-input>
+        <ion-select [(ngModel)]="account.role" name="role">
+          <ion-option value="regular">Regular</ion-option>
+          <ion-option value="vendor">Vendor</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>

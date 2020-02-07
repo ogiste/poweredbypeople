@@ -6,8 +6,8 @@ import {User} from '../../providers';
 import {MainPage} from '../';
 
 enum role {
-  regular,
-  vendor,
+  regular = 'regular',
+  vendor = 'vendor',
 }
 
 @IonicPage()
@@ -25,22 +25,21 @@ export class SignupPage {
     fname: string,
     lname: string,
     email: string,
-    other_name: string,
+    othername: string,
     phone: string,
     username: string,
     role: role,
     password: string,
-    isAdmin: boolean,
+    isAdmin?: boolean,
   } = {
-    fname: 'Tess',
-    lname: 'Huma',
-    email: 'Tess@Huma.com',
-    other_name: '',
+    fname: 'New',
+    lname: 'Name',
+    email: '',
+    othername: '',
     phone: '254203432032',
     username: 'user24',
     role: role.regular,
     password: '',
-    isAdmin: false
   };
 
   // Our translated text strings
