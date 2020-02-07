@@ -1,12 +1,13 @@
 <ion-content scroll="false">
-  <ion-list>
-    <ion-item >
-      <ion-thumbnail slot="start">
-        <ion-img [src]="'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT76gS7gxa5ObRF71evpPvERIYVgtEC8gPQ9kMHsQOOHiHnXu5_'"></ion-img>
-      </ion-thumbnail>
-      <ion-label>Business made easier</ion-label>
-    </ion-item>
-  </ion-list>
+
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <br>
+    <div class="splash-intro">
+      {{ 'WELCOME_INTRO' | translate }}
+    </div>
+  </div>
   <div padding>
     <button ion-button block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
     <button ion-button block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>

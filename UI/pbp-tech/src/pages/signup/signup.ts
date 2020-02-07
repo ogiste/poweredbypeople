@@ -8,7 +8,7 @@ import {MainPage} from '../';
 enum role {
   regular,
   vendor,
-};
+}
 
 @IonicPage()
 @Component({
@@ -45,6 +45,7 @@ export class SignupPage {
 
   // Our translated text strings
   private signupErrorString: string;
+  private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
               public user: User,
@@ -58,17 +59,37 @@ export class SignupPage {
 
   doSignup() {
     // Attempt to login in through our User service
+    const loginDetails = {username: this.account.username, password: this.account.password};
     this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      // Sign in if we're successful
+      this.translateService.get('LOGIN_ERROR').subscribe((value) => {
+        this.loginErrorString = value;
+      });
+      this.user.login(loginDetails).subscribe((resp) => {
+        //Successful login
+        let toast = this.toastCtrl.create({
+          message: 'Welcome!',
+          duration: 3000,
+          position: 'middle'
+        });
+        toast.present();
+        this.navCtrl.push(MainPage);
+      }, (err) => {
+        // Unable to log in
+        let toast = this.toastCtrl.create({
+          message: this.loginErrorString,
+          duration: 6000,
+          position: 'middle'
+        });
+        toast.present();
+      });
     }, (err) => {
-
-      this.navCtrl.push(MainPage);
 
       // Unable to sign up
       let toast = this.toastCtrl.create({
         message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
+        duration: 6000,
+        position: 'middle'
       });
       toast.present();
     });
