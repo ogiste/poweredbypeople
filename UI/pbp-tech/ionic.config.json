@@ -1,0 +1,7 @@
+{
+  "name": "pbp-tech",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
